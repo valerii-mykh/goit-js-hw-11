@@ -1,5 +1,5 @@
 
-const API_KEY = '21800674-819b02d10e21d1802ff230ab2';
+const API_KEY = '28590338-d8bd85ed8cacc4ff76ae71c31';
 
 export default fetchQuery;
 
