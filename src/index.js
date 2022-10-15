@@ -2,10 +2,10 @@ import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { refs } from './js/refs';
-import apiService from './js/apiService'
+import PixabayAPI from './js/axios'
 import markupElem from './js/markup';
 
-const api = new apiService();
+const pixabay = new PixabayAPI();
 const lightbox = new SimpleLightbox('.gallery a', {
     captionsData: 'alt',
     captionDelay: 250,
@@ -31,9 +31,9 @@ async function onSearchSubmit(event) {
     event.preventDefault();
 
     refs.galleryEl.innerHTML = '';
-    api.resetPage();
+    pixabay.resetPage();
 
-    api.query = event.currentTarget.elements.searchQuery.value;
+    pixabay.query = event.currentTarget.elements.searchQuery.value;
     
 
     refs.loadMoreBtn.classList.add('is-hidden');
@@ -60,7 +60,7 @@ refs.loadMoreBtn.addEventListener('click', onMoreBtnClick);
 
 async function fetchImages() {
     try {
-    const dataFetch = await api.fetchImages();
+    const dataFetch = await pixabay.fetchImages();
     await makeMarkup(dataFetch);
     } catch (error) {
     console.log(error);

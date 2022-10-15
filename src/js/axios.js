@@ -1,17 +1,6 @@
-
-const API_KEY = '28590338-d8bd85ed8cacc4ff76ae71c31';
-
-export default fetchQuery;
-
-function fetchQuery(query, pageNumber) {
-  return fetch(
-    `https://pixabay.com/api/?image_type=photo&orientation=horizontal&q=${query}&page=${pageNumber}&per_page=6&key=${API_KEY}`,
-  ).then(response => response.json());
-}
-import apiService from './apiService';
+import axios from 'axios';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
-apiService.defaults.baseURL = 'https://pixabay.com/api/';
-
+axios.defaults.baseURL = 'https://pixabay.com/api/';
 
 export default class PixabayAPI {
     constructor() {
@@ -30,7 +19,7 @@ export default class PixabayAPI {
     };
 
     try {
-        const response = await apiService.get(
+        const response = await axios.get(
         `${configPix.URL}?key=${configPix.key}&q=${this.searchQuery}&page=${this.page
         }&per_page=${configPix.per_page}&image_type=${configPix.image_type}&orientation=${configPix.orientation
         }&safesearch=${configPix.safesearch}`
